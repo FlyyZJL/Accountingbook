@@ -56,10 +56,10 @@ public class AddRecordActivity extends AppCompatActivity {
                 String date = datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-" + datePicker.getDayOfMonth();
 
                 if (saveRecord(currentUserId, amount, category, date, note)) {
-                    Toast.makeText(AddRecordActivity.this, "Record saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddRecordActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    Toast.makeText(AddRecordActivity.this, "Failed to save record", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddRecordActivity.this, "添加失败", Toast.LENGTH_SHORT).show();
                 }
             }
         });

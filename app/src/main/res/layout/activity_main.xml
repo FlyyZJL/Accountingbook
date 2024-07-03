@@ -18,7 +18,6 @@
         android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/fab_add"
         android:padding="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -27,6 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:translationY="-30dp"
+        android:translationX="-10dp"
         android:layout_margin="16dp"
         android:src="@drawable/ic_add"
         android:contentDescription="添加记录" />
@@ -36,6 +37,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:translationY="-30dp"
+        android:translationX="-10dp"
         android:layout_above="@id/fab_add"
         android:layout_margin="16dp"
         android:src="@drawable/ic_statistics"

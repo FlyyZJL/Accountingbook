@@ -7,7 +7,8 @@
     <color name="category_food">#FFCDD2</color>
     <color name="category_transport">#BBDEFB</color>
     <color name="category_shopping">#C8E6C9</color>
-    <color name="category_entertainment">#FFF9C4</color>
+    <color name="category_util">#F9A1FF</color>
+    <color name="category_entertainment">#FFCC80</color>
     <color name="colorPressed">#FFEBEE</color>
     <color name="colorDefault">#19000000</color>
 </resources>

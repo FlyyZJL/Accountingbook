@@ -3,46 +3,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/textView8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="25dp"
-        android:text="用户注册" />
+        android:text="管理员主页" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:text="添加用户" />
 
     <EditText
         android:id="@+id/usernameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:layout_marginTop="150dp"
-        android:hint="请输入用户名" />
+        android:hint="用户名" />
 
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="请输入密码"
+        android:hint="密码"
         android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/roleEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:visibility="gone"
-        android:text="user"
         android:hint="用户类型" />
 
     <Button
-        android:id="@+id/registerButton"
-        android:layout_width="200dp"
+        android:id="@+id/addButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="添加用户" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="200dp"
-        android:text="注册" />
+        android:text="用户列表" />
+
+    <ListView
+        android:id="@+id/usersListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

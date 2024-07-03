@@ -1,7 +1,10 @@
 package com.example.accountingbook;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -41,10 +44,15 @@ public class LoginActivity extends AppCompatActivity {
 
                 int userId = dbHelper.validateUser(username, password);
                 if (userId != -1) {
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("currentUserId", userId);
-                    startActivity(intent);
-                    finish();
+                    String role = getUserRole(username);
+                    if (role.equals("admin")) {
+                        Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("currentUserId", userId);
+                        startActivity(intent);
+                    }
                 } else {
                     // 处理登录失败
                     Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
@@ -58,5 +66,17 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @SuppressLint("Range")
+    private String getUserRole(String username) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT role FROM users WHERE username = ?", new String[]{username});
+        String role = null;
+        if (cursor.moveToFirst()) {
+            role = cursor.getString(cursor.getColumnIndex("role"));
+        }
+        cursor.close();
+        return role;
     }
 }

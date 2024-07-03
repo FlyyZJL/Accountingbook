@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:text="用户信息" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="用户名：" />
+
+    <EditText
+        android:id="@+id/editUsernameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="用户名" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="密码：" />
+
+    <EditText
+        android:id="@+id/editPasswordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="密码"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="用户类型：" />
+
+    <EditText
+        android:id="@+id/editRoleEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="用户类型" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="删除"
+            android:layout_marginRight="30dp"
+            android:textColor="#FF0000" />
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="保存" />
+    </LinearLayout>
+
+</LinearLayout>

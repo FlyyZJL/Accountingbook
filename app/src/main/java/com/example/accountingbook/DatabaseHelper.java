@@ -26,6 +26,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT, role TEXT)");
         // 创建记账记录表
         db.execSQL("CREATE TABLE records (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER, amount REAL, category TEXT, date TEXT, note TEXT)");
+
+        // 插入内置管理员
+        ContentValues values = new ContentValues();
+        values.put("username", "admin");
+        values.put("password", "admin");  // 在实际应用中请使用加密方式存储密码
+        values.put("role", "admin");
+        db.insert("users", null, values);
     }
 
     public int validateUser(String username, String password) {
