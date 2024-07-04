@@ -8,4 +8,10 @@
         <item>水电气费</item>
         <item>其他</item>
     </string-array>
+    <string-array name="time_ranges">
+        <item>每天</item>
+        <item>每月</item>
+        <item>每年</item>
+    </string-array>
+
 </resources>
