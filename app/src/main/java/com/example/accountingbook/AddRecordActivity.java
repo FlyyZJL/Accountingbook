@@ -17,6 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.math.BigDecimal;
 
+/**
+ * AddRecordActivity类用于添加新的记账记录
+ */
 public class AddRecordActivity extends AppCompatActivity {
     private EditText amountEditText, noteEditText;
     private Spinner categorySpinner;
@@ -25,6 +28,11 @@ public class AddRecordActivity extends AppCompatActivity {
     private DatabaseHelper dbHelper;
     private int currentUserId;
 
+    /**
+     * 当活动创建时调用
+     *
+     * @param savedInstanceState 保存的实例状态
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +40,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
         dbHelper = new DatabaseHelper(this);
 
+        // 初始化UI元素
         amountEditText = findViewById(R.id.amountEditText);
         noteEditText = findViewById(R.id.noteEditText);
         categorySpinner = findViewById(R.id.categorySpinner);
@@ -47,6 +56,7 @@ public class AddRecordActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
 
+        // 设置保存按钮的点击事件
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +75,16 @@ public class AddRecordActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 保存新的记账记录
+     *
+     * @param userId   用户ID
+     * @param amount   金额
+     * @param category 分类
+     * @param date     日期
+     * @param note     备注
+     * @return 如果记录成功插入返回true，否则返回false
+     */
     private boolean saveRecord(int userId, BigDecimal amount, String category, String date, String note) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -77,3 +97,4 @@ public class AddRecordActivity extends AppCompatActivity {
         return result != -1;
     }
 }
+

@@ -13,31 +13,47 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * ModifyRecordActivity类用于修改现有的记录。
+ * 它提供用户界面来显示和编辑记录的详细信息，并将更改保存到数据库中。
+ */
 public class ModifyRecordActivity extends AppCompatActivity {
+    // 输入字段和按钮的视图
     private EditText amountEditText, categoryEditText, noteEditText;
     private DatePicker datePicker;
     private Button saveButton;
+    // 数据库帮助类，用于访问数据库
     private DatabaseHelper dbHelper;
+    // 记录ID
     private int recordId;
 
+    /**
+     * 在Activity创建时调用，初始化视图和数据
+     *
+     * @param savedInstanceState 保存的实例状态
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_record);
 
+        // 初始化数据库帮助类
         dbHelper = new DatabaseHelper(this);
 
+        // 获取各视图组件
         amountEditText = findViewById(R.id.amountEditText);
         categoryEditText = findViewById(R.id.categoryEditText);
         noteEditText = findViewById(R.id.noteEditText);
         datePicker = findViewById(R.id.datePicker);
         saveButton = findViewById(R.id.saveButton);
 
-        // 获取记录ID
+        // 获取传递过来的记录ID
         recordId = getIntent().getIntExtra("recordId", -1);
 
+        // 加载记录的详细信息
         loadRecordDetails(recordId);
 
+        // 设置保存按钮的点击事件监听器
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,6 +62,7 @@ public class ModifyRecordActivity extends AppCompatActivity {
                 String note = noteEditText.getText().toString();
                 String date = datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-" + datePicker.getDayOfMonth();
 
+                // 更新记录并显示结果
                 if (updateRecord(recordId, amount, category, date, note)) {
                     Toast.makeText(ModifyRecordActivity.this, "更新成功", Toast.LENGTH_SHORT).show();
                     finish();
@@ -56,6 +73,11 @@ public class ModifyRecordActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 加载记录的详细信息并显示在输入字段中
+     *
+     * @param recordId 要加载的记录ID
+     */
     private void loadRecordDetails(int recordId) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query("records", null, "id = ?", new String[]{String.valueOf(recordId)}, null, null, null);
@@ -80,6 +102,16 @@ public class ModifyRecordActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 更新记录的详细信息
+     *
+     * @param recordId 要更新的记录ID
+     * @param amount   新的金额
+     * @param category 新的类别
+     * @param date     新的日期
+     * @param note     新的备注
+     * @return 是否更新成功
+     */
     private boolean updateRecord(int recordId, double amount, String category, String date, String note) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -91,3 +123,4 @@ public class ModifyRecordActivity extends AppCompatActivity {
         return result > 0;
     }
 }
+
