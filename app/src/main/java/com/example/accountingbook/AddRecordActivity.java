@@ -64,6 +64,12 @@ public class AddRecordActivity extends AppCompatActivity {
                 String note = noteEditText.getText().toString();
                 String category = categorySpinner.getSelectedItem().toString();
                 String date = datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-" + datePicker.getDayOfMonth();
+                //非空校验
+                if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+                    Toast.makeText(AddRecordActivity.this, "金额必须大于0", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 
                 if (saveRecord(currentUserId, amount, category, date, note)) {
                     Toast.makeText(AddRecordActivity.this, "添加成功", Toast.LENGTH_SHORT).show();

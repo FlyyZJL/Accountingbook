@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * RecordAdapter类是一个RecyclerView的适配器，用于显示记录列表。
- * 它通过ViewHolder模式来优化RecyclerView的性能，并提供点击和长按事件的接口。
+ * 提供点击和长按事件的接口。
  */
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordViewHolder> {
     // 保存记录列表的数据

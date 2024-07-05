@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
 
-        // 尝试获取从注册页面传递过来的用户名和密码
+        // 获取从注册页面传递过来的用户名和密码
         String username = getIntent().getStringExtra("username");
         String password = getIntent().getStringExtra("password");
         if (username != null && password != null) {
@@ -57,6 +57,11 @@ public class LoginActivity extends AppCompatActivity {
                 // 获取输入的用户名和密码
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
+                // 非空校验
+                if (username.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "请填写所有信息", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 // 验证用户并获取用户ID
                 int userId = dbHelper.validateUser(username, password);

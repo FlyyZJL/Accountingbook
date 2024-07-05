@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         // 获取传递过来的当前用户ID
         currentUserId = getIntent().getIntExtra("currentUserId", -1);
 
-        // 初始化视图组件
+        // 初始化列表组件
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

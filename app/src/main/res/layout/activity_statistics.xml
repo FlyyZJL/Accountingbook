@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+
     android:layout_height="match_parent">
 
     <TextView
@@ -22,8 +23,9 @@
         android:text="总支出: 0"
         android:textColor="@android:color/black"/>
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:orientation="horizontal">
 
         <Button
@@ -31,12 +33,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="5dp"
             android:text="选择日期" />
 
         <Button
             android:id="@+id/selectRangeButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:text="选择范围" />
     </LinearLayout>

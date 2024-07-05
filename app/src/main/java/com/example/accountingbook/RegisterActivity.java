@@ -2,6 +2,7 @@ package com.example.accountingbook;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -49,6 +50,18 @@ public class RegisterActivity extends AppCompatActivity {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 String role = roleEditText.getText().toString();
+                //非空校验
+                if (username.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(RegisterActivity.this, "请填写所有信息", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //检查用户名是否已存在
+                SQLiteDatabase db = dbHelper.getReadableDatabase();
+                Cursor cursor = db.query("users", null, "username=?", new String[]{username}, null, null, null);
+                if (cursor.getCount() > 0) {
+                    Toast.makeText(RegisterActivity.this, "用户名已存在", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 // 调用注册用户的方法
                 if (registerUser(username, password, role)) {
                     // 注册成功，显示提示信息并跳转到登录界面
@@ -59,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     // 注册失败，显示提示信息
-                    Toast.makeText(RegisterActivity.this, "请填写所有信息", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
                 }
             }
         });
