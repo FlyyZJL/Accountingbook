@@ -44,4 +44,36 @@
         android:src="@drawable/ic_statistics"
         android:contentDescription="统计" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/BGM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:translationY="-30dp"
+        android:translationX="-10dp"
+        android:layout_above="@id/fab_statistics"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_music"
+        android:contentDescription="播放音乐" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/Video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:translationY="-30dp"
+        android:translationX="-10dp"
+        android:layout_above="@id/BGM"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_video_play"
+        android:contentDescription="播放视频" />
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+
 </RelativeLayout>

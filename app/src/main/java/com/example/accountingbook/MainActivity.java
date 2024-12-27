@@ -3,10 +3,15 @@ package com.example.accountingbook;
 
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.MediaController;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FloatingActionButton fabAdd;
     private FloatingActionButton fabStatistics;
+    private MediaPlayer mediaPlayer;
+    private FloatingActionButton bgmButton;
+    private boolean isPlaying = false;
+    private VideoView videoView;
+    private FloatingActionButton videoButton;
     // 数据库帮助类，用于访问数据库
     private DatabaseHelper dbHelper;
     // 记录适配器和记录列表
@@ -53,6 +63,50 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // 初始化MediaPlayer并设置音频资源
+        mediaPlayer = MediaPlayer.create(this, R.raw.background_music);
+        mediaPlayer.setLooping(true); // 设置循环播放
+        bgmButton = findViewById(R.id.BGM);
+        bgmButton.setOnClickListener(v -> {
+            if (isPlaying) {
+                mediaPlayer.pause();
+                bgmButton.setImageResource(R.drawable.ic_music); // 切换为播放图标
+                bgmButton.setContentDescription("播放音乐");
+                Toast.makeText(MainActivity.this, "音乐已暂停", Toast.LENGTH_SHORT).show();
+            } else {
+                mediaPlayer.start();
+                bgmButton.setImageResource(R.drawable.ic_music_pause); // 切换为暂停图标
+                bgmButton.setContentDescription("暂停音乐");
+                Toast.makeText(MainActivity.this, "音乐已播放", Toast.LENGTH_SHORT).show();
+            }
+            isPlaying = !isPlaying;
+        });
+        // 初始化VideoView
+        videoView = findViewById(R.id.videoView);
+
+        // 设置视频路径
+        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.sample_video;
+        Uri uri = Uri.parse(videoPath);
+        videoView.setVideoURI(uri);
+
+        // 添加媒体控制器
+        MediaController mediaController = new MediaController(this);
+        videoView.setMediaController(mediaController);
+        mediaController.setAnchorView(videoView);
+
+        // 初始化播放视频按钮并设置点击事件
+        videoButton = findViewById(R.id.Video);
+        videoButton.setOnClickListener(v -> {
+            if (videoView.getVisibility() == View.GONE) {
+                videoView.setVisibility(View.VISIBLE);
+                videoView.start();
+                Toast.makeText(MainActivity.this, "视频已播放", Toast.LENGTH_SHORT).show();
+            } else {
+                videoView.pause();
+                videoView.setVisibility(View.GONE);
+                Toast.makeText(MainActivity.this, "视频已停止", Toast.LENGTH_SHORT).show();
+            }
+        });
         fabAdd = findViewById(R.id.fab_add);
         fabAdd.setOnClickListener(v -> {
             // 启动添加记录活动
@@ -135,6 +189,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         loadRecords();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.stop(); // 停止播放
+            mediaPlayer.release(); // 释放资源
+            mediaPlayer = null;
+        }
     }
 }
 

@@ -44,7 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // 插入内置管理员
         ContentValues values = new ContentValues();
         values.put("username", "admin");
-        values.put("password", "admin");  // 在实际应用中请使用加密方式存储密码
+        values.put("password", "admin"); // 默认密码为admin
         values.put("role", "admin");
         db.insert("users", null, values);
     }
